@@ -6,5 +6,5 @@
 ##### 1. Khóa học Javascript cơ bản
 <img src="https://mobifone-media-files.s3.ap-southeast-1.amazonaws.com/JS_basic.png" />
 ##### 2. Khóa học về ES6
-<img src="https://mobifone-media-files.s3.ap-southeast-1.amazonaws.com/ES6.png" />
+<img src="https://mobifone-media-files.s3.ap-southeast-1.amazonaws.com/ES6.png"  />
 
