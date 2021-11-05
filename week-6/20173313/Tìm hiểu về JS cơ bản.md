@@ -1,10 +1,11 @@
 # Bài tập tuần 6
-## Họ và tên: Công Đào Minh Uyên
-### Mã số sinh viên: 20176063
-### Nhóm: 1
-#### I. Nội dung: Hoàn thành khóa học javascript cơ bản trên freeCodeCamp
-##### 1. Khóa học Javascript cơ bản
-<img src="https://mobifone-media-files.s3.ap-southeast-1.amazonaws.com/JS_basic.png" />
-##### 2. Khóa học về ES6
-<img src="https://mobifone-media-files.s3.ap-southeast-1.amazonaws.com/ES6.png"  />
+## Họ và tên: Vũ Văn Quân
+### Mã số sinh viên: 20173313
+### Nhóm: 3
+### I. Nội dung: Hoàn thành khóa học javascript cơ bản trên freeCodeCamp
+#### 1. Khóa học Javascript cơ bản
+<img src="https://raw.githubusercontent.com/quanqvv/example/master/basic_js.PNG" />
+
+#### 2. Khóa học về ES6
+<img src="https://raw.githubusercontent.com/quanqvv/example/master/es6.PNG"  />
 
