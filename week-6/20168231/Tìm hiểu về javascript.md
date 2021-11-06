@@ -1,7 +1,6 @@
 # Bài tập tuần 6
-## Họ và tên: Vũ Minh Hiếu
-## MSSV: 20194284
-## Nhóm 2
+## Họ và tên: Nguyễn Phan Huy
+## MSSV: 20168231
 ### I. Nội dung: Hoàn thành khóa học javascript cơ bản trên freeCodeCamp
 #### 1. Khóa học javascript cơ bản
 ![image](https://user-images.githubusercontent.com/93398955/140337615-df00187b-2f82-4196-a7a3-23b7de8d2356.png)
