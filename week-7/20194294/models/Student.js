@@ -8,7 +8,6 @@ const studentSchema = new Schema({
         type: String,
         require: [true, "Please enter student's code"],
         unique: [true, "This studentCode is duplicate"]
-
     },
     name: {
         type: String,
