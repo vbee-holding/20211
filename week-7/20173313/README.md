@@ -92,7 +92,7 @@
 
     **URL** : `/api/v1/student/:mssv`
 
-    **Method** : `POST`
+    **Method** : `PUT`
 
     **Example Data**
 
@@ -112,6 +112,6 @@
 
     **URL** : `/api/v1/student/:mssv`
 
-    **Method** : `POST`
+    **Method** : `DELETE`
 
 
