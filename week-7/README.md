@@ -42,7 +42,7 @@ Application run at: http://localhost:3000/
 
 2. Lấy thông tin sinh viên
 
-    Endpoint: GET http://localhost:3000/sinhviens/student/{_id}
+    Endpoint: GET http://localhost:3000/sinhviens/{_id}
 
     Response: HTTP Code 200
 
