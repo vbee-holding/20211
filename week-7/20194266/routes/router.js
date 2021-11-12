@@ -12,3 +12,4 @@ route.get('/addUser', services.addUser)
 
 route.get('/updateUser', services.updateUser)
 route.delete('/api/users/:id', controller.deleteUser);
+module.exports = route
