@@ -15,3 +15,4 @@ route.get('/updateUser', services.updateUser)
 
 
 route.post('/api/users', controller.createUser);
+module.exports = route
