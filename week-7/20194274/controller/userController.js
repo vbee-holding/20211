@@ -1,6 +1,7 @@
 const Student = require('../model/student');
 // get all student
 const getAllStudent = async(req,res)=>{
+    console.log(req.body.mssv);
    try {
        Student.find({},(err,doc)=>{
            if(err){
@@ -9,7 +10,7 @@ const getAllStudent = async(req,res)=>{
            if(!doc){
                return res.json({status:true,msg:'No document found!'})
            }
-           return res.json({status:true,data:doc});
+           return res.json({status:true, data:doc });
        })
    } catch (error) {
        console.log(error);
@@ -19,14 +20,23 @@ const getAllStudent = async(req,res)=>{
 // add user method post
 const addStudent = async(req,res)=>{
     let student;
+    let flag = true;
     console.log(req.body);
     try {
      const {hoten, mssv, lop, khoa, email, sodienthoai, anh, diachi} = req.body;
      console.log(hoten, mssv, lop, khoa, email, sodienthoai, anh, diachi);
-     student = new Student({hoten, mssv, lop, khoa, email, sodienthoai, anh, diachi});
-     await student.save().then(doc=>{
-         res.json({status:true,data:doc})
+     Student.find({},(err, doc) =>{
+         doc.map(one => {
+             if (one.mssv == mssv) return res.json({status:false,msg:'Student is present'})
+             flag = false;
+         })
      })
+     if (flag) {
+        student = new Student({hoten, mssv, lop, khoa, email, sodienthoai, anh, diachi});
+        await student.save().then(doc=>{
+            res.json({status:true,data:doc})
+        })
+     }
     } catch (error) {
         console.log(error);
     }
@@ -71,7 +81,7 @@ const deleteStudent = async(req,res)=>{
                return res.json({status:false,msg:'Server error'})
             }
             if(!doc){
-               return res.json({status:false,msg:'Ko ton tai '})
+               return res.json({status:false,msg:'Not found'})
             }
             return res.json({status:true,msg:'Delete successfully'});
         })
