@@ -1,63 +1,63 @@
-require("sinhvien").config();
+require("Student").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
 
 app.use(express.json());
 
-// Cors options
 const corsOptions = {
     origin: "*",
 };
 app.use(cors(corsOptions));
 
-// Mongoose connection
 const connectDB = require("./connect");
+const studentModel = require("./student");
+const StudentRoute = require('./route');
 
-const sinhvienModel = require("./sinhvien");
+const getAllStudent = async(req, res) => {
+    const student = await studentModel.find();
+    res.send(student);
+};
 
-app.get("/sinhvien", async(req, res) => {
-    const sinhvien = await sinhvienModel.find();
-    res.send(sinhvien);
-});
-
-app.get("/sinhvien/:_id", async(req, res) => {
+const getStudentbyID = async(req, res) => {
     const { _id } = req.params;
     try {
-        const sinhvien = await sinhvienModel.findById(_id);
-        res.send(sinhvien);
+        const student = await studentModel.findById(_id);
+        res.send(student);
     } catch (error) {
         res.status(404).json({ Message: "student not found!!!" });
     }
-});
+};
 
-app.post("/sinhvien", async(req, res) => {
-    const newsinhvien = req.body;
-    await sinhvienModel.create(newsinhvien);
+app.post("/newstudent", async(req, res) => {
+    const newstudent = req.body;
+    await studentModel.create(newstudent);
     res.send({ Message: "student created!!!" });
 });
 
-app.put("/sinhvien/:_id", async(req, res) => {
+const editStudent = async(req, res) => {
     const _id = req.params;
-    const sinhvienData = req.body;
-
-    const updatesinhvien = await sinhvienModel.findByIdAndUpdate(
-        _id, { $set: sinhvienData }, { new: true }
+    const studentData = req.body;
+    const updateStudent = await studentModel.findByIdAndUpdate(
+        _id, { $set: studentData }, { new: true }
     );
-    // res.send({ Message: "student updated!!!", updatesinhvien });
-    res.send({ Message: "student updated!!!" });
-});
+    res.send({ Message: "updated complete!!!" });
+};
 
-app.delete("/sinhvien/delete/:_id", async(req, res) => {
+
+const deleteStudent = async(req, res) => {
     const _id = req.params;
-
-    const deletesinhvien = await sinhvienModel.findByIdAndDelete(_id);
-    // res.send(deletesinhvien);
-    res.send({ Message: "student deleted!!!" });
-});
+    const deleteStudent = await studentModel.findByIdAndDelete(_id);
+    res.send({ Message: "deleted complete!!!" });
+};
 
 app.listen(process.env.PORT, () =>
     connectDB()
     .then(() => console.log("Server is running..."))
     .catch((error) => console.log(error))
 );
+
+exports.getStudentbyID = getStudentbyID;
+exports.getAllStudent = getAllStudent;
+exports.editStudent = editStudent;
+exports.deleteStudent = deleteStudent;

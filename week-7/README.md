@@ -42,7 +42,7 @@ Application run at: http://localhost:3000/
 
 2. Lấy thông tin sinh viên
 
-    Endpoint: GET http://localhost:3000/sinhviens/{_id}
+    Endpoint: GET http://localhost:3000/sinhviens/student/{_id}
 
     Response: HTTP Code 200
 
@@ -51,11 +51,11 @@ Application run at: http://localhost:3000/
     ```
     {
             "_id":"618d36aa4ab7f287c1b786be",
-            "hoten":"Rose",
+            "name":"Rose",
             "mssv":"20175214",
-            "lop":"Blackpink",
-            "khoa":"1997",
-            "sdt":"033333333",
+            "class":"Blackpink",
+            "generation":"1997",
+            "telephone":"033333333",
             "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTtcQCvHuPrRaP0KHaDPCJQWRwb7u9inLa0g&usqp=CAU",
             "address":"Auckland, NZ",
             "email":"róe@bp.com"
@@ -72,11 +72,11 @@ Application run at: http://localhost:3000/
     ```
     {
             "_id":"618d5ef1576ff384118885c7",
-            "hoten":"Jisoo",
+            "name":"Jisoo",
             "mssv":"2015211",
-            "lop":"Blackpink",
-            "khoa":"1995",
-            "sdt":"0326431",
+            "class":"Blackpink",
+            "generation":"1995",
+            "telephone":"0326431",
             "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC7EClmtcW1jfgfljNarZeudcaNPAXa71q1g&usqp=CAU",
             "address":"Sanbon-dong, Gunpo, Hàn Quốc",
             "email":"jisoo@bp.com"
@@ -102,11 +102,11 @@ Application run at: http://localhost:3000/
     Request JSON:
     ```
     {
-        "hoten": "Jennie Kim",
+        "name": "Jennie Kim",
         "mssv": "20187288"
-        "lop": "Blackpink",
-        "khoa": "1996"  
-        "sdt": "033333333",
+        "class": "Blackpink",
+        "generation": "1996"  
+        "telephone": "033333333",
         "image": "testupdate.png",
         "address": "Gangnam-gu",
         "email": "jenniekim@bp.com",   
