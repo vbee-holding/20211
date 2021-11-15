@@ -1,6 +1,5 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import bodyParser from 'body-parser'
 import {router as studentRoute} from './routes/students.js'
 import dotenv from "dotenv"
 dotenv.config()
@@ -8,13 +7,11 @@ dotenv.config()
 const app = express()
 app.use(express.json())
 const port = process.env.PORT || 3334
-
-
 app.use("/api/v1/student", studentRoute)
 
 app.get("/", (req, resp)=>{
     resp.json({
-        message: "Hello 2P"
+        message: "Hello!!!"
     })
 })
 
