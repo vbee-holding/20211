@@ -10,5 +10,5 @@ app.use(StudentRoute,(req,res,next)=>{
 })
 
 app.listen(5000, () => {
-    console.log("Sever dang chay o port 5000");
+    console.log("Sever dang chay o port");
 })
