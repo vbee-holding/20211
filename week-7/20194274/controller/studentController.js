@@ -77,7 +77,7 @@ const deleteStudent = async(req,res)=>{
                return res.json({status:false,msg:'Server error'})
             }
             if(!doc){
-               return res.json({status:false,msg:'Ko ton tai '})
+               return res.json({status:false,msg:'Not found'})
             }
             return res.json({status:true,msg:'Delete successfully'});
         })
