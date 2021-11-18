@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
-const sinhvienSchema = new mongoose.Schema({
-    hoten: String,
-    mssv: String,
-    lop: String,
-    khoa: String,
+const studentSchema = new mongoose.Schema({
+    name: String,
+    id: String,
+    class: String,
+    generation: String,
     email: String,
-    sdt: String,
+    telephone: String,
     image: String,
     address: String,
 });
 
-const sinhvienModel = mongoose.model("Sinhvien", sinhvienSchema);
+const studentModel = mongoose.model("student", studentSchema);
 
-module.exports = sinhvienModel;
+module.exports = studentModel;
