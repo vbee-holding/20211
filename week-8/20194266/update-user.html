@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thông tin sinh viên</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex justify-between">
+               <div class="filter">
+                   <a href="/"><i class="fas fa-angle-double-left"></i> Tất cả sinh viên</a>
+               </div>
+            </div>
+            <div class="form-title text-center">
+                <h2 class="text-dark">Cập nhật thông tin sinh viên</h2>
+                <span class="text-light">Điền vào form dưới đây để sửa lại thông tin sinh viên</span>
+            </div>
+     <form method="POST" id="update_user">
+        <div class="new_user">
+            <div class="form-group">
+                <label for="name" class="text-light">Tên </label>
+                <input type="hidden" name="id" value="<%= user._id %>">
+                <input type="text" name="name" value="<%= user.name %>" placeholder="La Thi Ha">
+            </div>
+            <div class="form-group">
+                <label for="Email" class="text-light">Email</label>
+                <input type="text" name="email" value="<%= user.email%>" placeholder="supertoanhoc@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="studentID" class="text-light">Mã số sinh viên</label>
+                <input type="text" name="studentID" value="<%= user.studentID%>" >
+            </div>
+            <div class="form-group">
+                <label for="course" class="text-light">Khóa</label>
+                <input type="text" name="course" value="<%= user.course%>" >
+            </div>
+            <div class="form-group">
+                <label for="class" class="text-light">Lớp</label>
+                <input type="text" name="class" value="<%= user.class%>" >
+            </div>
+            <div class="form-group">
+                <label for="telephonenumber" class="text-light">Số điện thoại</label>
+                <input type="text" name="telephonenumber" value="<%= user.telephonenumber%>" >
+            </div>
+            <div class="form-group">
+                <label for="address" class="text-light">Địa chỉ</label>
+                <input type="text" name="address" value="<%= user.address%>" >
+            </div>
+            <div class="form-group">
+                <label for="gender" class="text-light">Giới tính</label>
+                <div class="radio inline">
+                    <input type="radio" id="radio-2" name="gender" value="Male" <%= user.gender == 'Male' ? 'checked' : '' %>>
+                    <label for="radio-2" class="radio-label">Nam </label>
+                </div>
+                <div class="radio inline">
+                    <input type="radio" id="radio-3" name="gender" value="Female"  <%= user.gender == 'Female' ? 'checked' : '' %> >
+                    <label for="radio-3" class="radio-label">Nữ</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Lưu lại</button>
+            </div>
+    
+        </div>
+    </form>
+           
+        </div>
+    </main>
+</body>
+</html>
