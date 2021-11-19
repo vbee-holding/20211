@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button id="Student-list-button">
+            Student List
+        </button>
+        
+        <button id="Add-Student-button" >
+            Add Student
+        </button>
+        
+        <div class="Search">
+            <input type="text" name="" id="Search" title="Search" > 
+            <button id="Search-by-MSSV-button">
+                Search by MSSV
+            </button>
+        </div>
+
+    </header>
+    
+    <h1>Thêm sinh viên</h1>
+    <div>
+        <form class="form" method="POST">
+
+            <div class="form-group">
+              <label for="name-input">Họ và Tên</label> <br>
+              <input type="text" class="form-element" id="name-input"  placeholder="Nhập tên của bạn">
+            </div>
+    
+            <div class="form-group">
+              <label for="MSSV-input">Mã số sinh viên</label>   <br>
+              <input type="number" class="form-element" id="MSSV-input" placeholder="MSSV">
+            </div>
+    
+            <div class="form-group">
+                <label for="class-input">Lớp</label><br>
+                <input type="text" class="form-element" id="Class-input" placeholder="Lớp">
+              </div>
+    
+            <div class="form-group">
+                <label for="Khóa-input">Khóa</label><br>
+                <input type="text" class="form-element" id="Khóa-input" placeholder="Khóa học">
+            </div>
+    
+            <div class="form-group">
+                <label for="email-input">Email</label><br>
+                <input type="email" class="form-element" id="email-input" placeholder="Email">
+            </div>
+            
+            <div class="form-group">
+                <label for="SDT-input">Số điện thoại</label><br>
+                <input type="text" class="form-element" id="SDT-input" >
+            </div>
+    
+            <div class="form-group">
+                <label for="image-input">Ảnh</label><br>
+                <input type="text" class="form-element" id="image-input" placeholder="Nhập URL ảnh">
+            </div>
+    
+            <div class="form-group">
+                <label for="address-input">Địa chỉ</label><br>
+                <input type="text" class="form-element" id="image-input" placeholder="Địa chỉ">
+            </div>
+    
+            <br>
+            <button type="submit" class="submit-button">Add this student</button>
+        </form>
+    
+
+    </div>
+    
+
+</body>
+</html>
