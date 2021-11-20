@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Danh sách sinh viên</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/select2/select2.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/perfect-scrollbar/perfect-scrollbar.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+  </head>
+
+  <body>
+    <div class="limiter">
+      <div class="title">
+        <h3>Danh sách sinh viên</h3>
+      </div>
+      <button
+        id="add_button"
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#addModal"
+      >
+        Thêm
+      </button>
+      <div
+        class="modal fade"
+        id="addModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="addModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Thêm sinh viên</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label>Họ tên</label>
+                  <input class="form-control" id="name" />
+                </div>
+                <div class="form-group">
+                  <label>Mã số sinh viên</label>
+                  <input class="form-control" id="MSSV" />
+                </div>
+                <div class="form-group">
+                  <label>Lớp</label>
+                  <input class="form-control" id="class" />
+                </div>
+                <div class="form-group">
+                  <label>Khoá</label>
+                  <input class="form-control" id="generation" />
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input class="form-control" id="email" />
+                </div>
+                <div class="form-group">
+                  <label>Số điện thoại</label>
+                  <input class="form-control" id="phone" />
+                </div>
+                <div class="form-group">
+                  <label>Địa chỉ</label>
+                  <input class="form-control" id="address" />
+                </div>
+                <div class="form-group">
+                  <label>Ảnh</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    accept="image/*"
+                    id="imgInp"
+                  />
+                  <img src="" alt="your image" id="image" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Huỷ
+              </button>
+              <button
+                id="add"
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Tạo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Modal -->
+      <div
+        class="modal fade"
+        id="editModal"
+        tabindex="-1"
+        role="dialog"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModal">Sửa sinh viên</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label>Họ tên</label>
+                  <input class="form-control" id="edit_name" />
+                </div>
+                <div class="form-group">
+                  <label>Mã số sinh viên</label>
+                  <input class="form-control" id="edit_MSSV" />
+                </div>
+                <div class="form-group">
+                  <label>Lớp</label>
+                  <input class="form-control" id="edit_class" />
+                </div>
+                <div class="form-group">
+                  <label>Khoá</label>
+                  <input class="form-control" id="edit_generation" />
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input class="form-control" id="edit_email" />
+                </div>
+                <div class="form-group">
+                  <label>Số điện thoại</label>
+                  <input class="form-control" id="edit_phone" />
+                </div>
+                <div class="form-group">
+                  <label>Địa chỉ</label>
+                  <input class="form-control" id="edit_address" />
+                </div>
+                <div class="form-group">
+                  <label>Ảnh</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    accept="image/*"
+                    id="edit_imgInp"
+                  />
+                  <img src="" alt="your image" id="edit_image" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Huỷ
+              </button>
+              <button
+                onclick="Edit()"
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                id="edit_btn"
+              >
+                Sửa
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Modal -->
+      <div
+        class="modal fade"
+        id="deleteModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModal">Xoá sinh viên</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">Bạn có thực sự muốn xoá không?</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Huỷ
+              </button>
+              <button
+                onclick="Delete()"
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                id="delete_btn"
+              >
+                Xoá
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-table100">
+        <div class="wrap-table100">
+          <div class="table100 ver1 m-b-110">
+            <div class="table100-head">
+              <table>
+                <thead>
+                  <tr class="row100 head">
+                    <th class="column0">#</th>
+                    <th class="column1">Họ tên</th>
+                    <th class="column2">Mã số sinh viên</th>
+                    <th class="column3">Lớp</th>
+                    <th class="column4">Khoá</th>
+                    <th class="column5">Email</th>
+                    <th class="column6">Số điện thoại</th>
+                    <th class="column7">Ảnh</th>
+                    <th class="column8">Địa chỉ</th>
+                    <th class="column9"><div class="box"></div></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="table100-body js-pscroll">
+              <table>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+    <script>
+      $(".js-pscroll").each(function () {
+        var ps = new PerfectScrollbar(this);
+
+        $(window).on("resize", function () {
+          ps.update();
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+  </body>
+</html>
