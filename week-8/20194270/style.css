@@ -1,0 +1,106 @@
+
+header {
+    background-color: rgb(83, 79, 79);
+    align-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+#Student-list-button {
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    background-color: rgb(83, 79, 79);
+    margin-right: 10px;
+   
+    color: rgba(155, 241, 223, 0.822);
+}
+
+#Add-Student-button {
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    background-color: rgb(83, 79, 79);
+    margin-right: 10px;
+    
+    color: rgba(155, 241, 223, 0.822);
+}
+
+.Search {
+    color: rgba(155, 241, 223, 0.822);
+    float :right;
+    margin: 5px;
+    
+}
+
+#Search-by-MSSV-button{
+    width: 120px;
+}
+
+#Search {
+    height: 20px;
+}
+
+.Student-List {
+    margin-left: 50px;
+}
+
+table {
+    border-collapse: collapse;  
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border:1px solid rgba(155, 241, 223, 0.822);
+    
+}
+
+th{
+    background-color: #eee;
+}
+
+button {
+    height: 30px;
+    width: 70px;
+    padding: 0px;
+    text-align: center;
+    background-color: rgba(155, 241, 223, 0.822);
+    
+}
+
+button {
+    height: 30px;
+    width: 70px;
+    padding: 0px;
+    text-align: center;
+    background-color: rgba(155, 241, 223, 0.822);
+    
+}
+
+
+.form-element {
+    
+    margin-bottom: 10px;
+    height: 20px;
+    width: 240px;
+    
+}
+
+.form {
+    text-align: center;
+    margin-top: 20px;
+    
+}
+
+.submit-button {
+    width: 120px;
+}
+
+.detail {
+    text-align: center;
+}
+
+
