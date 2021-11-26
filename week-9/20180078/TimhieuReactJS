@@ -1,6 +1,6 @@
 //Copy tu react.org
-* Tìm hiểu REACTJS
-** React là gì?.
+#Tìm hiểu REACTJS
+## React là gì?.
 	React là 1 thư viện JavaScript xây dựng giao diện 1 cách hiệu quả và linh hoạt từ những đoạn code nhỏ và độc lập được gọi là components.
 React có một vài loại components, tuy nhiên chúng ta sẽ bắt đầu với React.Component
 	Chúng ta sử dụng components để nói cho React biết ta muốn hiển thị gì trên màn hình. Khi dữ liệu thay đổi, React sẽ cập nhật và render lại các component một cách hiệu quả.
