@@ -1,9 +1,6 @@
 import { Container, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from "@mui/material"
 export default function ViewData(props) {
   const { data, open, handleClose } = props
-
-
-
   return (
     <Container>
       <Dialog open={open} onClose={handleClose}>
@@ -19,7 +16,7 @@ export default function ViewData(props) {
             label="Mã số sinh viên"
             fullWidth
             variant="standard"
-            defaultValue={data.studentCode}
+            value={data.studentCode}
             InputProps={{
               readOnly: true,
             }}
@@ -31,7 +28,7 @@ export default function ViewData(props) {
             label="Họ và tên"
             fullWidth
             variant="standard"
-            defaultValue={data.name}
+            value={data.name}
             InputProps={{
               readOnly: true,
             }}
@@ -43,7 +40,7 @@ export default function ViewData(props) {
             label="Lớp"
             fullWidth
             variant="standard"
-            defaultValue={data.className}
+            value={data.className}
             InputProps={{
               readOnly: true,
             }}
@@ -55,7 +52,7 @@ export default function ViewData(props) {
             label="Khóa"
             fullWidth
             variant="standard"
-            defaultValue={data.course}
+            value={data.course}
             InputProps={{
               readOnly: true,
             }}
@@ -68,7 +65,7 @@ export default function ViewData(props) {
             type="email"
             fullWidth
             variant="standard"
-            defaultValue={data.email}
+            value={data.email}
             InputProps={{
               readOnly: true,
             }}
@@ -80,7 +77,7 @@ export default function ViewData(props) {
             label="Số điện thoại"
             fullWidth
             variant="standard"
-            defaultValue={data.phoneNumber}
+            value={data.phoneNumber}
             InputProps={{
               readOnly: true,
             }}
@@ -92,14 +89,14 @@ export default function ViewData(props) {
             label="Địa chỉ"
             fullWidth
             variant="standard"
-            defaultValue={data.address}
+            value={data.address}
             InputProps={{
               readOnly: true,
             }}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClose}>Back</Button>
+          <Button onClick={handleClose}>Back</Button>
         </DialogActions>
       </Dialog>
     </Container>

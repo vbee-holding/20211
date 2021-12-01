@@ -7,16 +7,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import axios from 'axios';
 
 export default function DataTable(props) {
   const [data, setData] = useState(null)
+  let i = 0, j = 0;
 
-  const getStudentData = async () => {
+  const fetchStudent = async () => {
     const result = await axios.get('http://localhost:4000/student/');
     setData(result.data.data)
-    console.log(data)
   }
 
   const handleDelete = async (id) => {
@@ -30,12 +30,9 @@ export default function DataTable(props) {
   }
 
   useEffect(() => {
-    getStudentData()
+    fetchStudent()
   }, [])
 
-  let i = 0, j = 0;
-
-  console.log(data)
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', marginTop: '20px' }}>
       <TableContainer sx={{ maxHeight: 530 }}>
@@ -56,25 +53,25 @@ export default function DataTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {!data && <h1>Loading data....</h1>}
-            {data && data.map((sv) => (
+            {data && data.map((student) => (
               <TableRow key={++j}>
                 <TableCell>{++i}</TableCell>
-                <TableCell>{sv.studentCode}</TableCell>
-                <TableCell>{sv.name}</TableCell>
-                <TableCell>{sv.className}</TableCell>
-                <TableCell>{sv.course}</TableCell>
-                <TableCell>{sv.email}</TableCell>
-                <TableCell>{sv.phoneNumber}</TableCell>
-                <TableCell>{sv.address}</TableCell>
-                <TableCell><Button variant="contained" onClick={() => { props.handleOpenEdit(sv) }} color="warning">Chỉnh sửa</Button></TableCell>
-                <TableCell><Button variant="contained" onClick={() => { props.handleOpenView(sv) }} >Chi tiết</Button></TableCell>
-                <TableCell><Button variant="contained" onClick={() => { handleDelete(sv._id) }} color="error">Xóa</Button></TableCell>
+                <TableCell>{student.studentCode}</TableCell>
+                <TableCell>{student.name}</TableCell>
+                <TableCell>{student.className}</TableCell>
+                <TableCell>{student.course}</TableCell>
+                <TableCell>{student.email}</TableCell>
+                <TableCell>{student.phoneNumber}</TableCell>
+                <TableCell>{student.address}</TableCell>
+                <TableCell><Button variant="contained" onClick={() => { props.handleOpenEdit(student) }} color="warning">Chỉnh sửa</Button></TableCell>
+                <TableCell><Button variant="contained" onClick={() => { props.handleOpenView(student) }} >Chi tiết</Button></TableCell>
+                <TableCell><Button variant="contained" onClick={() => { handleDelete(student._id) }} color="error">Xóa</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      {!data && <Typography variant="h2">Loading data....</Typography>}
     </Paper>
   );
 }

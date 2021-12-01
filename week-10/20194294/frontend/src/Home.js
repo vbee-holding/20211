@@ -1,5 +1,4 @@
-import { Container, Button, Box } from "@mui/material";
-import axios from "axios";
+import { Container, Button } from "@mui/material";
 import { useState } from "react";
 import CreateData from "./component/CreateData";
 import DataTable from "./component/DataTable";
@@ -7,49 +6,50 @@ import EditData from "./component/EditData";
 import ViewData from "./component/ViewData";
 
 export default function Home() {
-    const [openEdit, setOpenEdit] = useState(false);
-    const [openAddNew, setOpenAddNew] = useState(false);
-    const [openView, setView] = useState(false);
-    const [data, setData]= useState(null)
-    const [dataView, setDataView]= useState(null)
-    const handleOpenEdit = (data) => {
-        setOpenEdit(true);
-        setData(data)
-      //  console.log(data)
+    const [open, setOpen] = useState({
+        edit: false,
+        addNew: false,
+        view: false
+    })
+    const [data, setData] = useState({
+        view: null,
+        edit: null
+    })
+    const handleOpenEdit = (value) => {
+        setOpen({ ...open, edit: true });
+        setData({ ...data, edit: value })
     };
 
     const handleCloseEdit = () => {
-        setOpenEdit(false);
+        setOpen({ ...open, edit: false });
     };
 
     const handleOpenAddNew = async () => {
-        setOpenAddNew(true);
-        
+        setOpen({ ...open, addNew: true });
     };
 
     const handleCloseAddNew = () => {
-        setOpenAddNew(false);
-        
+        setOpen({ ...open, addNew: false });
     };
 
-    const handleOpenView = (data) => {
-        setView(true);
-        setDataView(data)
+    const handleOpenView = (value) => {
+        setOpen({ ...open, view: true });
+        setData({ ...data, view: value })
     };
 
     const handleCloseView = () => {
-        setView(false);
+        setOpen({ ...open, view: false })
     };
 
     return (
         <>
             <Container>
-                <Button variant="contained" style={{marginLeft:'80%', marginTop:'2%'}} onClick={handleOpenAddNew}>Thêm mới sinh viên</Button>
+                <Button variant="contained" style={{ marginLeft: '80%', marginTop: '2%' }} onClick={handleOpenAddNew}>Thêm mới sinh viên</Button>
             </Container>
-            <DataTable handleOpenEdit={handleOpenEdit} handleOpenView={handleOpenView}/>
-            {data&& <EditData open={openEdit} handleClose={handleCloseEdit} id={data}/>}
-            {dataView && <ViewData open={openView} handleClose={handleCloseView} data={dataView}/>}
-            <CreateData open={openAddNew} handleClose={handleCloseAddNew}/>
+            <DataTable handleOpenEdit={handleOpenEdit} handleOpenView={handleOpenView} />
+            {data.edit && <EditData open={open.edit} handleClose={handleCloseEdit} data={data.edit} />}
+            {data.view && <ViewData open={open.view} handleClose={handleCloseView} data={data.view} />}
+            <CreateData open={open.addNew} handleClose={handleCloseAddNew} />
         </>
     )
 }

@@ -3,28 +3,24 @@ import { useState } from "react";
 import axios from 'axios';
 export default function CreateData(props) {
   const { open, handleClose } = props
+  const [student, setStudent] = useState({
+    name: '',
+    studentCode: '',
+    className: '',
+    course: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    imagePath: ''
+  })
 
-  const [name, setName] = useState('');
-  const [studentCode, setStudentCode] = useState('');
-  const [className, setClassName] = useState('');
-  const [course, setCourse] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [profileImage, setProfileImage] = useState('')
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setStudent({ ...student, [event.target.name]: value })
+  }
 
   const handleSubmit = async () => {
-    const newStudent = {
-      name: name,
-      studentCode: studentCode,
-      className: className,
-      course: course,
-      email: email,
-      phoneNumber: phoneNumber,
-      address: address,
-      imagePath: profileImage
-    };
-    const result = await axios.post('http://localhost:4000/student/create', newStudent)
+    const result = await axios.post('http://localhost:4000/student/create', student)
     if (result.data.success) {
       alert("Thêm mới sinh viên thành công!");
       props.handleClose();
@@ -40,87 +36,94 @@ export default function CreateData(props) {
         <DialogTitle>Thêm mới sinh viên</DialogTitle>
         <DialogContent>
           <div style={{ height: '60px', marginLeft: '40%' }}>
-            <img src={profileImage} alt="Failed to load" width="60px" height="60px" />
+            <img src={student.imagePath} alt="Failed to load" width="60px" height="60px" />
           </div>
           <TextField
             autoFocus
             margin="dense"
-            id="image"
+            name="imagePath"
             label="Link ảnh"
             fullWidth
+            value={student.imagePath}
             variant="standard"
-            onChange={e => setProfileImage(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="mssv"
+            name="studentCode"
             label="Mã số sinh viên"
             fullWidth
+            value={student.studentCode}
             variant="standard"
-            onChange={e => setStudentCode(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            name="name"
             label="Họ và tên"
             fullWidth
+            value={student.name}
             variant="standard"
-            onChange={e => setName(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="lop"
+            name="className"
             label="Lớp"
             fullWidth
+            value={student.className}
             variant="standard"
-            onChange={e => setClassName(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="khoa"
+            name="course"
             label="Khóa"
             fullWidth
+            value={student.course}
             variant="standard"
-            onChange={e => setCourse(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="email"
+            name="email"
             label="Email"
             type="email"
             fullWidth
+            value={student.email}
             variant="standard"
-            onChange={e => setEmail(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="sdt"
+            name="phoneNumber"
             label="Số điện thoại"
             fullWidth
+            value={student.phoneNumber}
             variant="standard"
-            onChange={e => setPhoneNumber(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="diaChi"
+            name="address"
             label="Địa chỉ"
             fullWidth
+            value={student.address}
             variant="standard"
-            onChange={e => setAddress(e.target.value)}
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={props.handleClose}>Cancel</Button>
           <Button onClick={() => { handleSubmit() }}>Submit</Button>
         </DialogActions>
-
       </Dialog>
     </Container>
   )

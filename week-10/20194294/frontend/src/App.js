@@ -3,7 +3,7 @@ import MenuBar from "./component/MenuBar";
 import Home from "./Home";
 function App() {
   return (
-    <Grid container className="App">
+    <Grid container className="app">
       <MenuBar />
       <Grid container className="content">
         <Home/>
