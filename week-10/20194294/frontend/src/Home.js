@@ -1,55 +1,36 @@
 import { Container, Button } from "@mui/material";
 import { useState } from "react";
-import CreateData from "./component/CreateData";
-import DataTable from "./component/DataTable";
-import EditData from "./component/EditData";
-import ViewData from "./component/ViewData";
+import CreateData from "./components/CreateData";
+import DataTable from "./components/DataTable";
+import EditData from "./components/EditData";
+import ViewData from "./components/ViewData";
 
 export default function Home() {
     const [open, setOpen] = useState({
         edit: false,
-        addNew: false,
+        create: false,
         view: false
     })
-    const [data, setData] = useState({
-        view: null,
-        edit: null
-    })
-    const handleOpenEdit = (value) => {
-        setOpen({ ...open, edit: true });
-        setData({ ...data, edit: value })
-    };
+    const [data, setData] = useState(null)
 
-    const handleCloseEdit = () => {
-        setOpen({ ...open, edit: false });
-    };
+    const handleOpen = (componentName, data = null) => {
+        setOpen({ ...open, [componentName]: true });
+        setData(data)
+    }
 
-    const handleOpenAddNew = async () => {
-        setOpen({ ...open, addNew: true });
-    };
-
-    const handleCloseAddNew = () => {
-        setOpen({ ...open, addNew: false });
-    };
-
-    const handleOpenView = (value) => {
-        setOpen({ ...open, view: true });
-        setData({ ...data, view: value })
-    };
-
-    const handleCloseView = () => {
-        setOpen({ ...open, view: false })
-    };
+    const handleClose = (componentName) => {
+        setOpen({ ...open, [componentName]: false })
+    }
 
     return (
         <>
             <Container>
-                <Button variant="contained" style={{ marginLeft: '80%', marginTop: '2%' }} onClick={handleOpenAddNew}>Thêm mới sinh viên</Button>
+                <Button variant="contained" style={{ marginLeft: '80%', marginTop: '2%' }} onClick={() => handleOpen("create")}>Thêm mới sinh viên</Button>
             </Container>
-            <DataTable handleOpenEdit={handleOpenEdit} handleOpenView={handleOpenView} />
-            {data.edit && <EditData open={open.edit} handleClose={handleCloseEdit} data={data.edit} />}
-            {data.view && <ViewData open={open.view} handleClose={handleCloseView} data={data.view} />}
-            <CreateData open={open.addNew} handleClose={handleCloseAddNew} />
+            <DataTable handleOpen={handleOpen} />
+            {data && <EditData open={open.edit} handleClose={handleClose} data={data} setData={setData}/>}
+            {data && <ViewData open={open.view} handleClose={handleClose} data={data} />}
+            <CreateData open={open.create} handleClose={handleClose} />
         </>
     )
 }

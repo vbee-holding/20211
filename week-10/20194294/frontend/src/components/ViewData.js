@@ -1,14 +1,23 @@
-import { Container, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from "@mui/material"
-export default function ViewData(props) {
-  const { data, open, handleClose } = props
+import {
+  Container,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+  Button,
+  Box
+} from "@mui/material"
+
+export default function ViewData({ data, open, handleClose }) {
   return (
     <Container>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open}>
         <DialogTitle>Xem thông tin sinh viên</DialogTitle>
         <DialogContent>
-          <div style={{ height: '60px', marginLeft: '40%' }}>
+          <Box style={{ height: '60px', marginLeft: '40%' }}>
             <img src={data.imagePath} alt="Failed to load" width="60px" height="60px" />
-          </div>
+          </Box>
           <TextField
             autoFocus
             margin="dense"
@@ -96,7 +105,7 @@ export default function ViewData(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Back</Button>
+          <Button onClick={() => handleClose("view")}>Back</Button>
         </DialogActions>
       </Dialog>
     </Container>

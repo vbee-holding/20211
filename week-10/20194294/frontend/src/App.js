@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import MenuBar from "./component/MenuBar";
+import MenuBar from "./components/MenuBar";
 import Home from "./Home";
 function App() {
   return (

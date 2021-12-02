@@ -1,51 +1,48 @@
-import { Container, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from "@mui/material"
-import { useState } from "react";
-import axios from 'axios';
-export default function CreateData(props) {
-  const { open, handleClose } = props
-  const [student, setStudent] = useState({
-    name: '',
-    studentCode: '',
-    className: '',
-    course: '',
-    email: '',
-    phoneNumber: '',
-    address: '',
-    imagePath: ''
-  })
+import {
+  Container,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+  Button, Box
+} from "@mui/material"
+import { updateStudent } from "../services/StudentService";
+
+export default function EditData({ data: student, open, setData, handleClose }) {
 
   const handleChange = (event) => {
-    const value = event.target.value;
-    setStudent({ ...student, [event.target.name]: value })
+    const { value, name } = event.target
+    setData({ ...student, [name]: value })
   }
 
-  const handleSubmit = async () => {
-    const result = await axios.post('http://localhost:4000/student/create', student)
-    if (result.data.success) {
-      alert("Thêm mới sinh viên thành công!");
-      props.handleClose();
+  const handleSubmit = async (id, student) => {
+    const success = await updateStudent(id, student)
+    if (success) {
+      alert("Chỉnh sửa sinh viên thành công!");
+      handleClose();
       window.location.reload();
     } else {
-      alert("Thêm mới sinh viên thất bại!");
+      alert("Chỉnh sửa sinh viên thất bại!");
     }
   }
 
   return (
     <Container>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Thêm mới sinh viên</DialogTitle>
+      <Dialog open={open} >
+        <DialogTitle>Chỉnh sửa thông tin sinh viên</DialogTitle>
         <DialogContent>
-          <div style={{ height: '60px', marginLeft: '40%' }}>
+          <Box style={{ height: '60px', marginLeft: '40%' }}>
             <img src={student.imagePath} alt="Failed to load" width="60px" height="60px" />
-          </div>
+          </Box>
           <TextField
             autoFocus
             margin="dense"
             name="imagePath"
             label="Link ảnh"
             fullWidth
-            value={student.imagePath}
             variant="standard"
+            value={student.imagePath}
             onChange={handleChange}
           />
           <TextField
@@ -54,8 +51,8 @@ export default function CreateData(props) {
             name="studentCode"
             label="Mã số sinh viên"
             fullWidth
-            value={student.studentCode}
             variant="standard"
+            value={student.studentCode}
             onChange={handleChange}
           />
           <TextField
@@ -64,8 +61,8 @@ export default function CreateData(props) {
             name="name"
             label="Họ và tên"
             fullWidth
-            value={student.name}
             variant="standard"
+            value={student.name}
             onChange={handleChange}
           />
           <TextField
@@ -74,8 +71,8 @@ export default function CreateData(props) {
             name="className"
             label="Lớp"
             fullWidth
-            value={student.className}
             variant="standard"
+            value={student.className}
             onChange={handleChange}
           />
           <TextField
@@ -84,8 +81,8 @@ export default function CreateData(props) {
             name="course"
             label="Khóa"
             fullWidth
-            value={student.course}
             variant="standard"
+            value={student.course}
             onChange={handleChange}
           />
           <TextField
@@ -95,8 +92,8 @@ export default function CreateData(props) {
             label="Email"
             type="email"
             fullWidth
-            value={student.email}
             variant="standard"
+            value={student.email}
             onChange={handleChange}
           />
           <TextField
@@ -105,8 +102,8 @@ export default function CreateData(props) {
             name="phoneNumber"
             label="Số điện thoại"
             fullWidth
-            value={student.phoneNumber}
             variant="standard"
+            value={student.phoneNumber}
             onChange={handleChange}
           />
           <TextField
@@ -115,14 +112,14 @@ export default function CreateData(props) {
             name="address"
             label="Địa chỉ"
             fullWidth
-            value={student.address}
             variant="standard"
+            value={student.address}
             onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClose}>Cancel</Button>
-          <Button onClick={() => { handleSubmit() }}>Submit</Button>
+          <Button onClick={() => handleClose("edit")}>Cancel</Button>
+          <Button onClick={() => handleSubmit(student._id, student)}>Submit</Button>
         </DialogActions>
       </Dialog>
     </Container>
