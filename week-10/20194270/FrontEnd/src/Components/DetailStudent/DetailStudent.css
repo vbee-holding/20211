@@ -1,0 +1,7 @@
+.detail {
+        text-align: center;
+}
+
+.detail__image {
+        max-width: 300px;
+}
