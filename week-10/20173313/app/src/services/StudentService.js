@@ -17,9 +17,6 @@ class StudentService {
         this.api = axios.create({
             baseURL: 'http://localhost:3334/api/v1/student'
         });
-        // this.api.interceptors.response.use((response) => new RestReponse(response.data), (error) => {
-        //     throw error;
-        // });
     }
 
     async get(studentId) {
@@ -53,22 +50,6 @@ class StudentService {
         return res.data
     }
 }
-// let res = await new StudentService().api.get()
-
-
-let data = {
-    studentId: 20170003,
-    name: 'Hoang Van C',
-    class: 'KHMT-04',
-    generation: 'K62',
-    email: 'HoangVanB@email.com',
-    phone: '09123457',
-    image: 'https://example.com/avatar2',
-    address: 'Thanh Xuan - Ha Noi',
-  }
-
-// console.log(await StudentService.getInstance().delete(20170003))
-// console.log(await StudentService.getInstance().getAll())
 
 export default StudentService;
 

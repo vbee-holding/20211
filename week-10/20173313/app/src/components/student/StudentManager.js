@@ -24,40 +24,38 @@ export class StudentManager extends Component {
         this.setState({ students: await studentService.getAll() })
     }
 
-    async handleAddStudent(event, studentInfo){
+    async handleAddStudent(event, studentInfo) {
         let res = await studentService.add(studentInfo)
         this.reloadTable()
         makeNotification(res)
     }
 
-    reloadTable(){
-        studentService.getAll().then(res => this.setState({students:res}))
+    reloadTable() {
+        studentService.getAll().then(res => this.setState({ students: res }))
     }
 
-    onDeleteStudent(event){
+    onDeleteStudent(event) {
         this.reloadTable()
     }
 
     render() {
         let onDeleteStudent = this.onDeleteStudent
-        let students = $.map(this.state.students, function(student, i){
+        let students = $.map(this.state.students, function (student, i) {
             return (
-                <Student student={student} onDeleteStudent={onDeleteStudent}/>
+                <Student student={student} onDeleteStudent={onDeleteStudent} />
             );
         });
         return (
-        
+
             <div>
                 <div class="navbar">
                     <a>Trang chủ</a>
                     <a class="active">Quản lý sinh viên</a>
                     <a>Thống kê</a>
-
                 </div>
                 <div class="top-content">
-                    <h3 style={{textAlign: 'center', fontSize: '40px', paddingTop: '20px'}}>Danh sách sinh viên</h3>
-
-                    <Popup modal trigger={<button class="btn-action" style={{float: 'right', marginRight: '10px'}}><i class="fa fa-plus">Thêm sinh viên</i></button>}> 
+                    <h3 style={{ textAlign: 'center', fontSize: '40px', paddingTop: '20px' }}>Danh sách sinh viên</h3>
+                    <Popup modal trigger={<button class="btn-action" style={{ float: 'right', marginRight: '10px' }}><i class="fa fa-plus">Thêm sinh viên</i></button>}>
                         <StudentForm onSubmit={this.handleAddStudent}></StudentForm>
                     </Popup>
                 </div>
