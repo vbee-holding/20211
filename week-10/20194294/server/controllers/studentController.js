@@ -6,13 +6,13 @@ exports.getStudentByID = async (req, res) => {
         const id = req.params.id;
         const result = await Student.findById(id);
         res.json({
-            success:true,
-            data:result
+            success: true,
+            data: result
         });
     } catch (err) {
         res.json({
-            success:false,
-            message:"Failed to get student by id"
+            success: false,
+            message: "Failed to get student by id"
         })
     }
 }
@@ -22,13 +22,13 @@ exports.getAllStudent = async (req, res) => {
     try {
         const result = await Student.find().sort({ createdAt: -1 });
         res.json({
-            success:true,
-            data:result
+            success: true,
+            data: result
         });
     } catch (error) {
         res.json({
-            success:false,
-            message:"Failed to get student by id"
+            success: false,
+            message: "Failed to get student by id"
         })
     }
 }
@@ -39,13 +39,13 @@ exports.addNewStudent = async (req, res) => {
         const student = new Student(req.body);
         const result = await student.save();
         res.json({
-            success:true,
-            data:result
+            success: true,
+            data: result
         });
     } catch (err) {
         res.json({
-            success:false,
-            message:"Failed to create new student"
+            success: false,
+            message: "Failed to create new student"
         })
     }
 }
@@ -55,15 +55,15 @@ exports.modifiedStudent = async (req, res) => {
     try {
         const id = req.params.id;
         const modifiedStudent = req.body;
-        const result = await Student.updateOne({ _id: id }, { $set: modifiedStudent });
+        await Student.updateOne({ _id: id }, { $set: modifiedStudent });
         res.json({
-            success:true,
-            data:modifiedStudent
+            success: true,
+            data: modifiedStudent
         })
     } catch (err) {
         res.json({
-            success:false,
-            message:"Failed to modified student"
+            success: false,
+            message: "Failed to modified student"
         });
     }
 }
@@ -74,13 +74,13 @@ exports.deleteStudent = async (req, res) => {
         const id = req.params.id;
         const result = await Student.findByIdAndDelete(id);
         res.json({
-            success:true,
-            data:result
+            success: true,
+            data: result
         });
     } catch (err) {
         res.json({
-            success:true,
-            message:"Failed to delete student"
+            success: true,
+            message: "Failed to delete student"
         })
     }
 }
