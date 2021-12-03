@@ -6,7 +6,7 @@
   
   ```cmake
   cd server
-  npm start
+  npm install
   npm start
   ```
 
