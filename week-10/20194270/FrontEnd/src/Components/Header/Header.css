@@ -1,0 +1,45 @@
+
+header {
+        background-color: rgb(83, 79, 79);
+        align-content: center;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+    
+    .mainPageButton {
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        background-color: rgb(83, 79, 79);
+        margin-right: 10px;
+       
+        color: rgba(155, 241, 223, 0.822);
+    }
+    
+    .listStudentButton {
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        background-color: rgb(83, 79, 79);
+        margin-right: 10px;
+        
+        color: rgba(155, 241, 223, 0.822);
+    }
+    
+    .search-box {
+        color: rgba(155, 241, 223, 0.822);
+        float :right;
+        margin: 5px;
+        
+    }
+    
+    .search-box__submit-button{
+        width: 120px;
+    }
+    
+    .search-box__input {
+        height: 20px;
+    }
+    
