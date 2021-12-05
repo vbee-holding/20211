@@ -1,13 +1,28 @@
 import React, { useState } from "react";
 
 const AddUserForm = (props) => {
-  const initialFormState = { id: null, name: "", student_id: "" };
+  const initialFormState = { id: null, name: "", student_id: "", image: "" };
   const [user, setUser] = useState(initialFormState);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    if (event.target.files) {
+      let file = event.target.files[0];
 
-    setUser({ ...user, [name]: value });
+      const reader = new FileReader();
+      if (file) {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          // console.log(reader.result);
+          value = reader.result;
+
+          setUser({ ...user, [name]: value });
+        };
+      }
+    } else {
+      setUser({ ...user, [name]: value });
+    }
+    console.log(user);
   };
 
   return (
@@ -64,12 +79,11 @@ const AddUserForm = (props) => {
         value={user.phone}
         onChange={handleInputChange}
       />
-
       <label>Ảnh</label>
       <input
-        type="text"
+        type="file"
+        accept="image/*"
         name="image"
-        value={user.image}
         onChange={handleInputChange}
       />
       <label>Địa chỉ</label>

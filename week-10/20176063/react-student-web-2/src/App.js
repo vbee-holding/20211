@@ -1,36 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserTable from "./tables/UserTable";
 import AddUserForm from "./forms/AddUserForm";
 import EditUserForm from "./forms/EditUserForm";
 
 const App = () => {
-  const usersData = [
-    {
-      id: 1,
-      name: "Uyen",
-      student_id: "20176063",
-      class: "LTU16B",
-      generation: "K62",
-      email: "email",
-      phone: "0983748",
-      image:
-        "https://media.istockphoto.com/photos/aurora-borealis-over-in-the-dark-night-sky-over-the-snowy-mountains-picture-id1277499450",
-      address: "ha noi",
-    },
-    {
-      id: 2,
-      name: "Tania",
-      student_id: "20176063",
-      class: "LTU16B",
-      generation: "K62",
-      email: "email",
-      phone: "0983748",
-      image: "imageddd",
-      address: "ha noi",
-    },
-  ];
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const [users, setUsers] = useState(usersData);
+  const [users, setUsers] = useState([]);
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
 
@@ -45,7 +22,54 @@ const App = () => {
     image: "",
     address: "",
   };
+
   const [currentUser, setCurrentUser] = useState(initialFormState);
+
+  const getUsers = () => {
+    fetch("https://api-dev-bootcamp-aurora0210.herokuapp.com/student")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          if (result.length > 0) {
+            for (let i = 0; i < result.length; i++) {
+              result[i].id = i + 1;
+            }
+          }
+          setUsers(result);
+        },
+
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+  };
+
+  const postUser = (user) => {
+    fetch("https://api-dev-bootcamp-aurora0210.herokuapp.com/student", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(user),
+    })
+      .then(() => {
+        alert("Tạo thành công!!!");
+      })
+      .then(() => {
+        getUsers();
+      });
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   const addRow = () => {
     setAdding(true);
@@ -54,15 +78,14 @@ const App = () => {
   const addUser = (user) => {
     setAdding(false);
 
-    user.id = users.length + 1;
-    setUsers([...users, user]);
-    console.log(users);
+    postUser(user);
   };
 
   const editRow = (user) => {
     setEditing(true);
     setCurrentUser({
       id: user.id,
+      _id: user._id,
       name: user.name,
       student_id: user.student_id,
       class: user.class,
@@ -74,60 +97,90 @@ const App = () => {
     });
   };
 
-  const updateUser = (id, updatedUser) => {
+  const updateUser = (_id, updatedUser) => {
     setEditing(false);
-    setUsers(users.map((user) => (user.id === id ? updatedUser : user)));
+
+    console.log(updatedUser);
+    fetch(`https://api-dev-bootcamp-aurora0210.herokuapp.com/student/${_id}`, {
+      method: "PUT",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(updatedUser),
+    })
+      .then(() => {
+        console.log("Loading");
+        alert("Sửa thành công!!!");
+      })
+      .then(() => {
+        getUsers();
+      });
+
+    // setUsers(users.map((user) => (user.id === id ? updatedUser : user)));
   };
 
-  const deleteUser = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
+  const deleteUser = (_id) => {
+    fetch(`https://api-dev-bootcamp-aurora0210.herokuapp.com/student/${_id}`, {
+      method: "DELETE",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+    })
+      .then(() => {
+        console.log("Loading");
+        alert("Xoá thành công!!!");
+      })
+      .then(() => {
+        getUsers();
+      });
   };
 
-  return (
-    <div className="container">
-      <h1>Danh sách sinh viên</h1>
-      <div>
-        {editing ? (
-          <div>
-            <h2>Sửa sinh viên</h2>
-            <EditUserForm
-              setEditing={setEditing}
-              currentUser={currentUser}
-              updateUser={updateUser}
+  if (!error) {
+    return (
+      <div className="container">
+        <h1>Danh sách sinh viên</h1>
+        <div>
+          {editing ? (
+            <div>
+              <h2>Sửa sinh viên</h2>
+              <EditUserForm
+                setEditing={setEditing}
+                currentUser={currentUser}
+                updateUser={updateUser}
+              />
+            </div>
+          ) : null}
+        </div>
+        <div>
+          {adding ? (
+            <div>
+              <h2>Thêm sinh viên</h2>
+              <AddUserForm setAdding={setAdding} addUser={addUser} />
+            </div>
+          ) : null}
+        </div>
+        <div className="flex-large">
+          {adding ? null : editing ? null : (
+            <UserTable
+              users={users}
+              deleteUser={deleteUser}
+              editRow={editRow}
+              addRow={addRow}
             />
-          </div>
-        ) : null}
+          )}
+        </div>
       </div>
-      <div>
-        {adding ? (
-          <div>
-            <h2>Thêm sinh viên</h2>
-            <AddUserForm setAdding={setAdding} addUser={addUser} />
-          </div>
-        ) : null}
-      </div>
-      <div className="flex-large">
-        {adding ? null : editing ? null : (
-          <UserTable
-            users={users}
-            deleteUser={deleteUser}
-            editRow={editRow}
-            addRow={addRow}
-          />
-        )}
-      </div>
-    </div>
-  );
+    );
+  } else if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 };
-
-// const App = () => {
-//   const { isShowing, toggle } = useModal();
-//   return (
-//     <div>
-//       <button onClick={toggle}>Show Modal</button>
-//       <Modal isShowing={isShowing} hide={toggle} />
-//     </div>
-//   );
-// };
 
 export default App;

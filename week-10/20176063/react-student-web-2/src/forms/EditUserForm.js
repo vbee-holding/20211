@@ -4,9 +4,24 @@ const EditUserForm = (props) => {
   const [user, setUser] = useState(props.currentUser);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    if (event.target.files) {
+      let file = event.target.files[0];
 
-    setUser({ ...user, [name]: value });
+      const reader = new FileReader();
+      if (file) {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          // console.log(reader.result);
+          value = reader.result;
+
+          setUser({ ...user, [name]: value });
+        };
+      }
+    } else {
+      setUser({ ...user, [name]: value });
+    }
+    
   };
 
   //   useEffect(() => {
@@ -18,7 +33,7 @@ const EditUserForm = (props) => {
       onSubmit={(event) => {
         event.preventDefault();
 
-        props.updateUser(user.id, user);
+        props.updateUser(user._id, user);
       }}
     >
       <label>Họ tên</label>
@@ -63,6 +78,15 @@ const EditUserForm = (props) => {
         type="text"
         name="phone"
         value={user.phone}
+        onChange={handleInputChange}
+      />
+      <label>Ảnh</label>
+      <input
+        type="file"
+        accept="image/*"
+        name="image"
+        alt=""
+        
         onChange={handleInputChange}
       />
       <label>Địa chỉ</label>
