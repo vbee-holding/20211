@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
 import "./popup.studentform.css"
-import '../../bower_components/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export class StudentForm extends Component {
 
