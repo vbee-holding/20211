@@ -1,0 +1,13 @@
+const express = require('express');
+const getStudentByID= require('./getStudentByID.js');
+const getAllStudent= require('./getAllStudent');
+const addStudent= require('./addStudent.js');
+const deleteStudent= require('./deleteStudent');
+const updateStudent= require('./updateStudent');
+const router= express.Router();
+router.get("/search",getStudentByID);
+router.get('/',getAllStudent);
+router.post('/add',addStudent);
+router.delete('/delete',deleteStudent);
+router.put('/update',updateStudent);
+module.exports=router;
