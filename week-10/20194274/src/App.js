@@ -7,34 +7,43 @@ import axios from 'axios';
 
 
 function App() {
+  const [students, setStudents] = useState([])
+  const [status, setStatus] = useState(false)
+  const [isNew, setIsNew] = useState(false)
+  const [index, setIndex] = useState(-1)
+  const [refresh, setRefresh] = useState(true)
 
   async function deleteMember(infor) {
     const url = 'http://localhost:5000/api/student/' + infor._id;
     await axios.delete(url, {
-        headers: {'Content-Type': 'application/json'} ,
+      headers: { 'Content-Type': 'application/json' },
+    }).then(res => {
+        setRefresh(!refresh);
     })
+    
   }
 
-  const [posts, setPosts] = useState([])
-  const [status, setStatus] = useState(false)
-  const [isNew, setIsNew] = useState(false)
-  const [index, setIndex] = useState(-1)
-  const [loading, setLoading] = useState(false)
-  const [value, setValue] = useState();
-
-  const refresh = ()=>{
-     getData();
+  const handleAddMember = () => {
+    setIsNew(true);
+    setStatus(true);
+    setIndex(-1);
   }
-  
+
+  const handleEditMember = (index) => {
+    setStatus(false);
+    setIsNew(true);
+    setIndex(index);
+  }
+
   useEffect(() => {
     getData();
-  }, [loading])
+  }, [refresh])
 
- async function getData() {
-   await axios.get(`http://localhost:5000/api/student`, { headers: {'Content-Type': 'application/json'} })
-    .then(res => {
-      setPosts(res.data.data)
-    })
+  async function getData() {
+    await axios.get(`http://localhost:5000/api/student`, { headers: { 'Content-Type': 'application/json' } })
+      .then(res => {
+        setStudents(res.data.data)
+      })
   }
 
   return (
@@ -42,11 +51,7 @@ function App() {
       <div className="container">
         <div className="head">
           <h2>List student</h2>
-          <a className="Newmember" href="#" onClick={() => {
-            setIsNew(true);
-            setStatus(true);
-            setIndex(-1);
-          }}>New member</a>
+          <a className="newmember" href="#" onClick={() => { handleAddMember() }}>New member</a>
         </div>
         <table className="table">
           <thead>
@@ -64,37 +69,33 @@ function App() {
 
           <tbody>
             {
-              posts.map((post, index) =>{
-                return(
-                  <tr key = {index}>
-              <td>{index}</td>
-              <td>
-                <div className="infor" >
-                  <img className="avatar" src="https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png" />
-                  <div className="nameAndEmail">
-                    <div className="nameIn">{post.hoten}</div>
-                    <div className="email" >{post.email}</div>
-                  </div>
-                </div>
-              </td>
-              <td>{post.mssv}</td>
-              <td>{post.lop}</td>
-              <td>{post.khoa}</td>
-              <td>{post.sodienthoai}</td>
-              <td><div>{post.address}</div></td>
-              <td><a href="#"><img className="icon" src={icon} onClick={() => {
-                setStatus(false);
-                setIsNew(true);
-                setIndex(index);
-              }} /></a>
-              <a href="#"><img className="iconrac" src={rac} onClick={() => {
-                deleteMember(post);
-                refresh();
-                setLoading(!loading)
-              }}></img></a>
-              </td>
-            </tr>
-                ) 
+              students.map((student, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index}</td>
+                    <td>
+                      <div className="infor" >
+                        <img className="avatar" src="https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png" />
+                        <div className="nameAndEmail">
+                          <div className="nameIn">{student.hoten}</div>
+                          <div className="email" >{student.email}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{student.mssv}</td>
+                    <td>{student.lop}</td>
+                    <td>{student.khoa}</td>
+                    <td>{student.sodienthoai}</td>
+                    <td><div>{student.diachi}</div></td>
+                    <td><a href="#">
+                      <img className="icon" src={icon} onClick={() => {handleEditMember(index);}}/>
+                    </a>
+                      <a href="#">
+                        <img className="iconrac" src={rac} onClick={() => {deleteMember(student);}}/>
+                      </a>
+                    </td>
+                  </tr>
+                )
               })
             }
           </tbody>
@@ -105,15 +106,14 @@ function App() {
           <div className="comment">Showing all data</div>
 
         </div>
-          
+
       </div>
       {
         (isNew) &&
-        <NewStudent callback = {() => {
-          refresh()
+        <NewStudent callBackCancel={() => {
+          setRefresh(!refresh)
           setIsNew(false)
-          setLoading(!loading)
-        }} status = {status} infor={posts[index]} index = {index} ></NewStudent> 
+        }} status={status} infor={students[index]} index={index} ></NewStudent>
       }
     </div>
   );

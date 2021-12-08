@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     lop: {
-        type: Number,
+        type: String    ,
         required: false,
         default: 'IT2'
 
