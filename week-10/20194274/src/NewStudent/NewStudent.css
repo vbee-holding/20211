@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.newStudent {
+    width: 60%;
+    position: absolute;
+    margin-left: 20%;
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 40px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.newStudent h2 {
+    margin-top: 20px;
+    margin-left: 5%;
+}
+
+.newStudent lable {
+    width: 123px;
+}
+
+.newStudent .avatar {
+    width: 200px;
+    height: 200px;
+    margin: 30px 50px;
+}
+
+.newStudent .bao {
+    height: 43px;
+    border-radius: 40px;
+    background-color: #F5F5F5;
+    margin: 13px 20px;
+    align-items: center;
+    padding-bottom: 4px;
+    padding-top: 10px;
+
+}
+
+.newStudent .divngoai {
+    display: flex;
+    align-items: center;
+}
+
+.newStudent input {
+    border: none;
+    width: 490px;
+    margin: 0px 20px;
+    background-color: #F5F5F5;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    outline: none;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.footer {
+    display: flex;
+    padding: 50px 50px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.button {
+    border-style: solid;
+    border-radius: 40px;
+    width: 169px;
+    height: 48px;
+    background-color: #6160DC;
+    font-family: Poppins;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0em;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    position: relative;
+    align-items: center;
+    margin: 0px 50px;
+}
